@@ -1,5 +1,5 @@
-#include <iostream>
 #include <vector>
+#include <iostream>
 
 std::vector<int> increaseVector(std::vector<int> vec, int n) {
     for (int i = 0; i < vec.size(); i++) {
@@ -8,36 +8,24 @@ std::vector<int> increaseVector(std::vector<int> vec, int n) {
     return vec;
 }
 
-int main() {
-    std::vector<int> originalVec = {1, 2, 3, 4, 5};
-    int increaseBy = 10;
+// Google Test
+#include <gtest/gtest.h>
 
-    std::vector<int> modifiedVec = increaseVector(originalVec, increaseBy);
+TEST(IncreaseVectorTest, Test1) {
+    std::vector<int> input = {1, 2, 3, 4, 5};
+    std::vector<int> expected = {2, 3, 4, 5, 6};
 
-    std::cout << "Original Vector: ";
-    for (int num : originalVec) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Modified Vector: ";
-    for (int num : modifiedVec) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    return 0;
+    ASSERT_EQ(increaseVector(input, 1), expected);
 }
-// Тест для функции increaseVector
-void testIncreaseVector() {
-    std::vector<int> testVec = {2, 4, 6, 8, 10};
-    int testIncreaseBy = 5;
 
-    std::vector<int> resultVec = increaseVector(testVec, testIncreaseBy);
+TEST(IncreaseVectorTest, Test2) {
+    std::vector<int> input = {10, 20, 30};
+    std::vector<int> expected = {15, 25, 35};
 
-    assert(resultVec[0] == 7);
-    assert(resultVec[1] == 9);
-    assert(resultVec[2] == 11);
-    assert(resultVec[3] == 13);
-    assert(resultVec[4] == 15);
+    ASSERT_EQ(increaseVector(input, 5), expected);
+}
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
